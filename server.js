@@ -1,21 +1,12 @@
 var http = require('http'),
     util = require('util'),
     fs = require('fs'),
-    ws = require('./ws.js')
+    ws = require('./ws.js'),
+    ui = require('./interface/server.js')
+
+ui.listen(4000)
 
 var clients = {}
-
-http.createServer(function(request, response) {
-  
-  response.writeHead(200, {
-    'Content-Type' : 'text/html'
-  })
-  
-  var rs = fs.createReadStream(__dirname + '/template.html')
-  util.pump(rs, response)
-  
-}).listen(4000)
-
 ws.createServer(function(websocket) {
   
   var username
